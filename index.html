@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Recommendation App</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #1f1f1f;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1, h2 {
+      color: #61dafb;
+    }
+
+    label {
+      color: #61dafb;
+      margin-right: 5px;
+    }
+
+    input {
+      padding: 8px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #282c34;
+      color: #fff;
+      width: 200px;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 8px 15px;
+      background-color: #61dafb;
+      color: #282c34;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #41a1f1;
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Music Recommendation App</h1>
+
+  <div class="input-container">
+    <h2>Dodaj użytkownika</h2>
+    <label for="userName">Nazwa użytkownika:</label>
+    <input type="text" id="userName">
+    <button onclick="addUser()">Dodaj</button>
+  </div>
+
+  <div class="input-container">
+    <h2>Dodaj piosenkę</h2>
+    <label for="songTitle">Tytuł piosenki:</label>
+    <input type="text" id="songTitle">
+    <button onclick="addSong()">Dodaj</button>
+  </div>
+
+  <div class="input-container">
+    <h2>Ocen piosenkę</h2>
+    <label for="userNameRating">Nazwa użytkownika:</label>
+    <input type="text" id="userNameRating">
+    <label for="songTitleRating">Tytuł piosenki:</label>
+    <input type="text" id="songTitleRating">
+    <label for="rating">Ocena (1-5):</label>
+    <input type="number" id="rating" min="1" max="5">
+    <button onclick="rateSong()">Oceń</button>
+  </div>
+
+  <div class="input-container">
+    <h2>Rekomendacje</h2>
+    <label for="recommendUserName">Nazwa użytkownika:</label>
+    <input type="text" id="recommendUserName">
+    <button onclick="getRecommendations()">Pobierz</button>
+  </div>
+
+  <div class="input-container">
+    <h2>Usuń użytkownika</h2>
+    <label for="deleteUserName">Nazwa użytkownika:</label>
+    <input type="text" id="deleteUserName">
+    <button onclick="deleteUser()">Usuń</button>
+  </div>
+
+  <div class="input-container">
+    <h2>Usuń piosenkę</h2>
+    <label for="deleteSongTitle">Tytuł piosenki:</label>
+    <input type="text" id="deleteSongTitle">
+    <button onclick="deleteSong()">Usuń</button>
+  </div>
+</body>
+
+  <script>
+    const apiUrl = 'http://localhost:3000';
+
+    function addUser() {
+      const userName = document.getElementById('userName').value;
+
+      fetch(`${apiUrl}/addUser`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userName }),
+        mode: 'cors'
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    }
+
+    function addSong() {
+      const songTitle = document.getElementById('songTitle').value;
+
+      fetch(`${apiUrl}/addSong`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ songTitle }),
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    }
+
+    function rateSong() {
+      const userName = document.getElementById('userNameRating').value;
+      const songTitle = document.getElementById('songTitleRating').value;
+      const rating = document.getElementById('rating').value;
+
+      fetch(`${apiUrl}/rateSong`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userName, songTitle, rating }),
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    }
+
+    function getRecommendations() {
+      const userName = document.getElementById('recommendUserName').value;
+
+      fetch(`${apiUrl}/recommendSongs/${userName}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Recommendations:', data);
+        alert(`Rekomendowane piosenki:\n${data.map(item => `${item.title} (Średnia ocena: ${item.avgRating})`).join('\n')}`);
+      })
+      .catch(error => console.error('Error:', error));
+    }
+
+    function deleteUser() {
+      const userName = document.getElementById('deleteUserName').value;
+
+      fetch(`${apiUrl}/deleteUser/${userName}`, {
+        method: 'DELETE',
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    }
+
+    function deleteSong() {
+      const songTitle = document.getElementById('deleteSongTitle').value;
+
+      fetch(`${apiUrl}/deleteSong/${songTitle}`, {
+        method: 'DELETE',
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>

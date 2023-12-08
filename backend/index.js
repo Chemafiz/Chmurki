@@ -141,7 +141,7 @@ app.get('/getTopRatedRestaurants', async (req, res) => {
 });
 
 
-app.get('/getTopRatedRestaurants', async (req, res) => {
+app.get('/getTopRatedRestaurants2', async (req, res) => {
   const result = await session.run(
     'MATCH (r:Restaurant)-[rat:RATED]->() ' +
     'WITH r, AVG(rat.rating) AS avgRating ' +
@@ -154,7 +154,7 @@ app.get('/getTopRatedRestaurants', async (req, res) => {
     avgRating: record.get('avgRating')
   }));
 
-  res.json(topRatedRestaurants);
+  res.json(topRatedRestaurants2);
 });
 
 // Uruchomienie serwera

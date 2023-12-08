@@ -124,6 +124,22 @@ app.get('/getAllRestaurants', async (req, res) => {
   res.json(allRestaurants);
 });
 
+app.get('/getTopRatedRestaurants', async (req, res) => {
+  const result = await session.run(
+    'MATCH (r:Restaurant)<-[rating:RATED]-() ' +
+    'WITH r, COUNT(rating) as numRatings ' +
+    'RETURN r.name as restaurantName, numRatings ' +
+    'ORDER BY numRatings DESC LIMIT 5'
+  );
+
+  const topRatedRestaurants = result.records.map(record => ({
+    name: record.get('restaurantName'),
+    numRatings: record.get('numRatings')
+  }));
+
+  res.json(topRatedRestaurants);
+});
+
 
 // Uruchomienie serwera
 app.listen(port, () => {

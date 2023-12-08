@@ -8,6 +8,15 @@
 <body>
   <h1>Aplikacja rekomendująca restauracje</h1>
 
+
+  <div class="input-container">
+    <h2>Top 5 najbardziej opiniowanych restauracji</h2>
+    <div id="topRatedRestaurants"></div>
+    <button onclick="getTopRatedRestaurants()">Pobierz top restauracje</button>
+  </div>
+
+
+
   <div class="input-container">
     <h2>Dodaj użytkownika</h2>
     <label for="userName">Nazwa użytkownika:</label>
@@ -200,6 +209,31 @@
         }
       })
       .catch(error => console.error('Error:', error));
+    }
+
+    function getTopRatedRestaurants() {
+      fetch(`${apiUrl}/getTopRatedRestaurants`)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Top Rated Restaurants:', data);
+          const topRatedRestaurantsContainer = document.getElementById('topRatedRestaurants');
+          topRatedRestaurantsContainer.innerHTML = '';
+
+          if (data.length > 0) {
+            const topRatedList = document.createElement('ul');
+
+            data.forEach(item => {
+              const listItem = document.createElement('li');
+              listItem.textContent = `${item.name} (${item.numRatings} opinii)`;
+              topRatedList.appendChild(listItem);
+            });
+
+            topRatedRestaurantsContainer.appendChild(topRatedList);
+          } else {
+            topRatedRestaurantsContainer.textContent = 'Brak danych.';
+          }
+        })
+        .catch(error => console.error('Error:', error));
     }
 
   </script>

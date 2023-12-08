@@ -26,7 +26,7 @@
     <h2>Oceń restaurację</h2>
     <label for="userNameRating">Nazwa użytkownika:</label>
     <input type="text" id="userNameRating">
-    <label for="restaurantNameRating">Tytuł piosenki:</label>
+    <label for="restaurantNameRating">Nazwa restauracji:</label>
     <input type="text" id="restaurantNameRating">
     <label for="rating">Ocena (1-5):</label>
     <input type="number" id="rating" min="1" max="5">
@@ -48,8 +48,8 @@
   </div>
 
   <div class="input-container">
-    <h2>Usuń piosenkę</h2>
-    <label for="deleteSongTitle">Tytuł piosenki:</label>
+    <h2>Usuń restaurację</h2>
+    <label for="deleteSongTitle">Nazwa restauracji:</label>
     <input type="text" id="deleteSongTitle">
     <button onclick="deleteRestaurant()">Usuń</button>
   </div>
@@ -112,7 +112,7 @@
       .then(response => response.json())
       .then(data => {
         console.log('Recommendations:', data);
-        alert(`Rekomendowane piosenki:\n${data.map(item => `${item.title} (Średnia ocena: ${item.avgRating})`).join('\n')}`);
+        alert(`Najlepsze restauracje dla Ciebie to:\n${data.map(item => `${item.title} (Średnia ocena: ${item.avgRating})`).join('\n')}`);
       })
       .catch(error => console.error('Error:', error));
     }

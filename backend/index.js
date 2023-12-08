@@ -92,7 +92,7 @@ app.delete('/deleteRestaurant/:restaurantName', async (req, res) => {
   const restaurantName = req.params.restaurantName;
 
   const result = await session.run(
-    'MATCH (r:Restaurant {title: $restaurantName}) DETACH DELETE r',
+    'MATCH (r:Restaurant {name: $restaurantName}) DETACH DELETE r',
     { restaurantName }
   );
 

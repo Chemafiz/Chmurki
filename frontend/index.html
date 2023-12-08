@@ -9,19 +9,6 @@
   <h1>Aplikacja rekomendująca restauracje</h1>
 
   <div class="input-container">
-    <h2>Lista użytkowników</h2>
-    <div id="userList"></div>
-    <button onclick="getAllUsers()">Pobierz użytkowników</button>
-  </div>
-
-  <div class="input-container">
-    <h2>Lista restauracji</h2>
-    <div id="restaurantList"></div>
-    <button onclick="getAllRestaurants()">Pobierz restauracje</button>
-  </div>
-  
-
-  <div class="input-container">
     <h2>Dodaj użytkownika</h2>
     <label for="userName">Nazwa użytkownika:</label>
     <input type="text" id="userName">
@@ -65,6 +52,18 @@
     <label for="deleteRestaurantName">Nazwa restauracji:</label>
     <input type="text" id="deleteRestaurantName">
     <button onclick="deleteRestaurant()">Usuń</button>
+  </div>
+
+  <div class="input-container">
+    <h2>Lista użytkowników</h2>
+    <div id="userList"></div>
+    <button onclick="getAllUsers()">Pobierz użytkowników</button>
+  </div>
+
+  <div class="input-container">
+    <h2>Lista restauracji</h2>
+    <div id="restaurantList"></div>
+    <button onclick="getAllRestaurants()">Pobierz restauracje</button>
   </div>
 
   <script>

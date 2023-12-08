@@ -47,7 +47,7 @@ app.post('/addRestaurant', async (req, res) => {
 
 // Ocena piosenki przez użytkownika
 app.post('/rateRestaurant', async (req, res) => {
-  const { userName, songTitle, rating } = req.body;
+  const { userName, restaurantName, rating } = req.body;
 
   const result = await session.run(
     'MATCH (u:User {name: $userName}), (r:Restaurant {name: $restaurantName}) ' +

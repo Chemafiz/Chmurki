@@ -99,6 +99,20 @@ app.delete('/deleteRestaurant/:restaurantName', async (req, res) => {
   res.send(result.summary.counters._stats);
 });
 
+
+app.get('/getAllUsers', async (req, res) => {
+  const result = await session.run(
+    'MATCH (u:User) RETURN u.name as userName'
+  );
+
+  const allUsers = result.records.map(record => ({
+    name: record.get('userName')
+  }));
+
+  res.json(allUsers);
+});
+
+
 // Uruchomienie serwera
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

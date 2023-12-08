@@ -9,6 +9,12 @@
   <h1>Aplikacja rekomendująca restauracje</h1>
 
   <div class="input-container">
+    <h2>Lista użytkowników</h2>
+    <div id="userList"></div>
+    <button onclick="getAllUsers()">Pobierz użytkowników</button>
+  </div>
+
+  <div class="input-container">
     <h2>Dodaj użytkownika</h2>
     <label for="userName">Nazwa użytkownika:</label>
     <input type="text" id="userName">
@@ -137,6 +143,32 @@
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => console.error('Error:', error));
+    }
+
+
+    function getAllUsers() {
+      fetch(`${apiUrl}/getAllUsers`)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Users:', data);
+          const userListContainer = document.getElementById('userList');
+          userListContainer.innerHTML = '';
+
+          if (data.length > 0) {
+            const userList = document.createElement('ul');
+
+            data.forEach(item => {
+              const listItem = document.createElement('li');
+              listItem.textContent = `${item.name}`;
+              userList.appendChild(listItem);
+            });
+
+            userListContainer.appendChild(userList);
+          } else {
+            userListContainer.textContent = 'Brak użytkowników.';
+          }
+        })
+        .catch(error => console.error('Error:', error));
     }
   </script>
 </body>

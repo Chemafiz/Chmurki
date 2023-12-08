@@ -88,11 +88,11 @@ app.delete('/deleteUser/:userName', async (req, res) => {
 });
 
 // Usunięcie piosenki po nazwie
-app.delete('/deleteRestaurant/:songTitle', async (req, res) => {
+app.delete('/deleteRestaurant/:restaurantName', async (req, res) => {
   const songTitle = req.params.songTitle;
 
   const result = await session.run(
-    'MATCH (s:Song {title: $songTitle}) DETACH DELETE s',
+    'MATCH (r:Restaurant {title: $restaurantName}) DETACH DELETE r',
     { songTitle }
   );
 

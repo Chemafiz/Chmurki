@@ -49,8 +49,8 @@
 
   <div class="input-container">
     <h2>Usuń restaurację</h2>
-    <label for="deleteSongTitle">Nazwa restauracji:</label>
-    <input type="text" id="deleteSongTitle">
+    <label for="deleteRestaurantName">Nazwa restauracji:</label>
+    <input type="text" id="deleteRestaurantName">
     <button onclick="deleteRestaurant()">Usuń</button>
   </div>
 
@@ -129,9 +129,9 @@
     }
 
     function deleteRestaurant() {
-      const songTitle = document.getElementById('deleteSongTitle').value;
+      const restaurantName = document.getElementById('deleteRestaurantName').value;
 
-      fetch(`${apiUrl}/deleteRestaurant/${songTitle}`, {
+      fetch(`${apiUrl}/deleteRestaurant/${restaurantName}`, {
         method: 'DELETE',
       })
       .then(response => response.json())

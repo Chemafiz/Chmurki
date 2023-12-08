@@ -39,7 +39,7 @@ app.post('/addRestaurant', async (req, res) => {
 
   const result = await session.run(
     'CREATE (:Restaurant {id: $restaurantId, name: $restaurantName})',
-    { restaurantId, restaurantName }
+    { restaurantId, restaurantName}
   );
 
   res.send(result.summary.counters._stats);

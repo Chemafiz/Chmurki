@@ -112,6 +112,18 @@ app.get('/getAllUsers', async (req, res) => {
   res.json(allUsers);
 });
 
+app.get('/getAllRestaurants', async (req, res) => {
+  const result = await session.run(
+    'MATCH (r:Restaurant) RETURN r.name as restaurantName'
+  );
+
+  const allRestaurants = result.records.map(record => ({
+    name: record.get('restaurantName')
+  }));
+
+  res.json(allRestaurants);
+});
+
 
 // Uruchomienie serwera
 app.listen(port, () => {

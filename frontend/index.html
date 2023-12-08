@@ -15,6 +15,13 @@
   </div>
 
   <div class="input-container">
+    <h2>Lista restauracji</h2>
+    <div id="restaurantList"></div>
+    <button onclick="getAllRestaurants()">Pobierz restauracje</button>
+  </div>
+  
+
+  <div class="input-container">
     <h2>Dodaj użytkownika</h2>
     <label for="userName">Nazwa użytkownika:</label>
     <input type="text" id="userName">
@@ -170,6 +177,32 @@
         })
         .catch(error => console.error('Error:', error));
     }
+
+    function getAllRestaurants() {
+    fetch(`${apiUrl}/getAllRestaurants`)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Restaurants:', data);
+        const restaurantListContainer = document.getElementById('restaurantList');
+        restaurantListContainer.innerHTML = '';
+
+        if (data.length > 0) {
+          const restaurantList = document.createElement('ul');
+
+          data.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${item.name}`;
+            restaurantList.appendChild(listItem);
+          });
+
+          restaurantListContainer.appendChild(restaurantList);
+        } else {
+          restaurantListContainer.textContent = 'Brak restauracji.';
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+
   </script>
 </body>
 </html>

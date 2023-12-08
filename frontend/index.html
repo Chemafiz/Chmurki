@@ -16,9 +16,9 @@
   </div>
 
   <div class="input-container">
-    <h2>Top Rated Restaurants with Avg Rating</h2>
-    <div id="topRatedRestaurantsAvg"></div>
-    <button onclick="getTopRatedRestaurantsWithAvgRating()">Pobierz top restauracje</button>
+    <h2>Top 5 najlepiej ocenianych restauracji</h2>
+    <div id="topRatedRestaurants"></div>
+    <button onclick="getTopRatedRestaurants()">Pobierz top restauracje</button>
   </div>
 
   <div class="input-container">
@@ -246,13 +246,13 @@
         .catch(error => console.error('Error:', error));
     }
 
-    function getTopRatedRestaurantsWithAvgRating() {
-      fetch(`${apiUrl}/getTopRatedRestaurantsWithAvgRating`)
+    function getTopRatedRestaurants() {
+      fetch(`${apiUrl}/getTopRatedRestaurants`)
         .then(response => response.json())
         .then(data => {
-          console.log('Top Rated Restaurants with Avg Rating:', data);
-          const topRatedRestaurantsAvgContainer = document.getElementById('topRatedRestaurantsAvg');
-          topRatedRestaurantsAvgContainer.innerHTML = '';
+          console.log('Top Rated Restaurants:', data);
+          const topRatedRestaurantsContainer = document.getElementById('topRatedRestaurants');
+          topRatedRestaurantsContainer.innerHTML = '';
 
           if (data.length > 0) {
             const topRatedList = document.createElement('ul');
@@ -263,9 +263,9 @@
               topRatedList.appendChild(listItem);
             });
 
-            topRatedRestaurantsAvgContainer.appendChild(topRatedList);
+            topRatedRestaurantsContainer.appendChild(topRatedList);
           } else {
-            topRatedRestaurantsAvgContainer.textContent = 'Brak danych.';
+            topRatedRestaurantsContainer.textContent = 'Brak danych.';
           }
         })
         .catch(error => console.error('Error:', error));

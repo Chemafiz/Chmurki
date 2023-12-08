@@ -141,24 +141,23 @@ app.get('/getTopRatedRestaurants', async (req, res) => {
 });
 
 
-app.get('/getTopRatedRestaurantsWithAvgRating', async (req, res) => {
-  try {
-    const result = await session.run(
-      'MATCH (r:Restaurant)-[rated:RATED]->() ' +
-      'WITH r, COUNT(rated) as numRatings, AVG(toFloat(rated.rating)) as avgRating ' +
-      'WHERE numRatings > 0 ' +
-      'ORDER BY avgRating DESC LIMIT 5 ' +
-      'RETURN r.name as name, avgRating'
-    );
+app.get('/getTopRatedRestaurants', async (req, res) => {
+  const result = await session.run(
+    'MATCH (r:Restaurant)-[rat:RATED]->() ' +
+    'WITH r, AVG(rat.rating) AS avgRating ' +
+    'RETURN r.name AS name, avgRating ' +
+    'ORDER BY avgRating DESC LIMIT 5'
+  );
 
-    const topRatedRestaurantsAvg = result.records.map(record => ({
-      name: record.get('name'),
-      avgRating: record.get('avgRating').toNumber()
-    }));
+  const topRatedRestaurants = result.records.map(record => ({
+    name: record.get('name'),
+    avgRating: record.get('avgRating')
+  }));
 
-    res.json(topRatedRestaurantsAvg);
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+  res.json(topRatedRestaurants);
+});
+
+// Uruchomienie serwera
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
 });

@@ -142,19 +142,24 @@ app.get('/getTopRatedRestaurants', async (req, res) => {
 
 
 app.get('/getTopRatedRestaurantsWithAvgRating', async (req, res) => {
-  const result = await session.run(
-    'MATCH (r:Restaurant)-[rated:RATED]->() ' +
-    'WITH r, AVG(toFloat(rated.rating)) as avgRating ' +
-    'ORDER BY avgRating DESC LIMIT 5 ' +
-    'RETURN r.name as name, avgRating'
-  );
+  try {
+    const result = await session.run(
+      'MATCH (r:Restaurant)-[rated:RATED]->() ' +
+      'WITH r, AVG(toFloat(rated.rating)) as avgRating ' +
+      'ORDER BY avgRating DESC LIMIT 5 ' +
+      'RETURN r.name as name, avgRating'
+    );
 
-  const topRatedRestaurantsAvg = result.records.map(record => ({
-    name: record.get('name'),
-    avgRating: record.get('avgRating')
-  }));
+    const topRatedRestaurantsAvg = result.records.map(record => ({
+      name: record.get('name'),
+      avgRating: record.get('avgRating').toNumber()
+    }));
 
-  res.json(topRatedRestaurantsAvg);
+    res.json(topRatedRestaurantsAvg);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 // Uruchomienie serwera

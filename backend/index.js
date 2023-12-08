@@ -50,9 +50,9 @@ app.post('/rateRestaurant', async (req, res) => {
   const { userName, songTitle, rating } = req.body;
 
   const result = await session.run(
-    'MATCH (u:User {name: $userName}), (s:Song {title: $songTitle}) ' +
-    'CREATE (u)-[:RATED {rating: toInteger($rating)}]->(s)',
-    { userName, songTitle, rating }
+    'MATCH (u:User {name: $userName}), (r:Restaurant {name: $restaurantName}) ' +
+    'CREATE (u)-[:RATED {rating: toInteger($rating)}]->(r)',
+    { userName, restaurantName, rating }
   );
 
   res.send(result.summary.counters._stats);

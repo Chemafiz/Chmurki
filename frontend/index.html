@@ -26,8 +26,8 @@
     <h2>Oceń restaurację</h2>
     <label for="userNameRating">Nazwa użytkownika:</label>
     <input type="text" id="userNameRating">
-    <label for="songTitleRating">Tytuł piosenki:</label>
-    <input type="text" id="songTitleRating">
+    <label for="restaurantNameRating">Tytuł piosenki:</label>
+    <input type="text" id="restaurantNameRating">
     <label for="rating">Ocena (1-5):</label>
     <input type="number" id="rating" min="1" max="5">
     <button onclick="rateRestaurant()">Oceń</button>
@@ -90,7 +90,7 @@
 
     function rateRestaurant() {
       const userName = document.getElementById('userNameRating').value;
-      const songTitle = document.getElementById('songTitleRating').value;
+      const restaurantName = document.getElementById('restaurantNameRating').value;
       const rating = document.getElementById('rating').value;
 
       fetch(`${apiUrl}/rateRestaurant`, {
@@ -98,7 +98,7 @@
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userName, songTitle, rating }),
+        body: JSON.stringify({ userName, restaurantName, rating }),
       })
       .then(response => response.json())
       .then(data => console.log(data))

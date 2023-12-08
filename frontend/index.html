@@ -112,7 +112,7 @@
       .then(response => response.json())
       .then(data => {
         console.log('Recommendations:', data);
-        alert(`Najlepsze restauracje dla Ciebie to:\n${data.map(item => `${item.title} (Średnia ocena: ${item.avgRating})`).join('\n')}`);
+        alert(`Najlepsze restauracje dla Ciebie to:\n${data.map(item => `${item.name} (Średnia ocena: ${item.avgRating})`).join('\n')}`);
       })
       .catch(error => console.error('Error:', error));
     }

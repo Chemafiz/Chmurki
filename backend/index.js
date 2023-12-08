@@ -141,17 +141,17 @@ app.get('/getTopRatedRestaurants', async (req, res) => {
 });
 
 
-app.get('/bestRatedRestaurants', async (req, res) => {
+app.get('/getBestRatedRestaurants', async (req, res) => {
   const result = await session.run(
-    'MATCH (r:Restaurant)-[rated:RATED]->() ' +
-    'RETURN r.name, COUNT(rated) as numRatings, AVG(toFloat(rated.rating)) as avgRating ' +
+    'MATCH (r:Restaurant)-[rat:RATED]->() ' +
+    'WITH r, AVG(rat.rating) AS avgRating ' +
+    'RETURN r.name AS name, avgRating ' +
     'ORDER BY avgRating DESC LIMIT 5'
   );
 
   const topRatedRestaurants = result.records.map(record => ({
-    name: record.get('r.name'),
-    numRatings: record.get('numRatings').toNumber(),
-    avgRating: record.get('avgRating').toNumber()
+    name: record.get('name'),
+    avgRating: record.get('avgRating')
   }));
 
   res.json(topRatedRestaurants);

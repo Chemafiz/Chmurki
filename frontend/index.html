@@ -17,7 +17,7 @@
 
   <div class="input-container">
     <h2>Top 5 najbardziej ocenianych restauracji</h2>
-    <div id="topRatedRestaurants"></div>
+    <div id="getBestRatedRestaurants"></div>
     <button onclick="getBestRatedRestaurants()">Pobierz top restauracje</button>
   </div>
 
@@ -247,11 +247,11 @@
     }
 
     function getBestRatedRestaurants() {
-      fetch(`${apiUrl}/bestRatedRestaurants`)
+      fetch(`${apiUrl}/getBestRatedRestaurants`)
         .then(response => response.json())
         .then(data => {
           console.log('Top Rated Restaurants:', data);
-          const topRatedRestaurantsContainer = document.getElementById('topRatedRestaurants');
+          const topRatedRestaurantsContainer = document.getElementById('getBestRatedRestaurants');
           topRatedRestaurantsContainer.innerHTML = formatRestaurantsList(data);
         })
         .catch(error => console.error('Error:', error));

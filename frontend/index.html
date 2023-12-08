@@ -18,7 +18,7 @@
   <div class="input-container">
     <h2>Top 5 najlepiej ocenianych restauracji</h2>
     <div id="topRatedRestaurants"></div>
-    <button onclick="getTopRatedRestaurants()">Pobierz top restauracje</button>
+    <button onclick="getTopRatedRestaurants2()">Pobierz top restauracje</button>
   </div>
 
   <div class="input-container">
@@ -246,7 +246,7 @@
         .catch(error => console.error('Error:', error));
     }
 
-    function getTopRatedRestaurants() {
+    function getTopRatedRestaurants2() {
       fetch(`${apiUrl}/getTopRatedRestaurants`)
         .then(response => response.json())
         .then(data => {

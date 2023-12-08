@@ -15,7 +15,11 @@
     <button onclick="getTopRatedRestaurants()">Pobierz top restauracje</button>
   </div>
 
-
+  <div class="input-container">
+    <h2>Top Rated Restaurants with Avg Rating</h2>
+    <div id="topRatedRestaurantsAvg"></div>
+    <button onclick="getTopRatedRestaurantsWithAvgRating()">Pobierz top restauracje</button>
+  </div>
 
   <div class="input-container">
     <h2>Dodaj użytkownika</h2>
@@ -237,6 +241,31 @@
             topRatedRestaurantsContainer.appendChild(topRatedList);
           } else {
             topRatedRestaurantsContainer.textContent = 'Brak danych.';
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function getTopRatedRestaurantsWithAvgRating() {
+      fetch(`${apiUrl}/getTopRatedRestaurantsWithAvgRating`)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Top Rated Restaurants with Avg Rating:', data);
+          const topRatedRestaurantsAvgContainer = document.getElementById('topRatedRestaurantsAvg');
+          topRatedRestaurantsAvgContainer.innerHTML = '';
+
+          if (data.length > 0) {
+            const topRatedList = document.createElement('ul');
+
+            data.forEach(item => {
+              const listItem = document.createElement('li');
+              listItem.textContent = `${item.name} (Średnia ocena: ${item.avgRating.toFixed(2)})`;
+              topRatedList.appendChild(listItem);
+            });
+
+            topRatedRestaurantsAvgContainer.appendChild(topRatedList);
+          } else {
+            topRatedRestaurantsAvgContainer.textContent = 'Brak danych.';
           }
         })
         .catch(error => console.error('Error:', error));

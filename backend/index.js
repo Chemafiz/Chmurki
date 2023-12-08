@@ -141,6 +141,22 @@ app.get('/getTopRatedRestaurants', async (req, res) => {
 });
 
 
+app.get('/getTopRatedRestaurantsWithAvgRating', async (req, res) => {
+  const result = await session.run(
+    'MATCH (r:Restaurant)-[rated:RATED]->() ' +
+    'WITH r, AVG(toFloat(rated.rating)) as avgRating ' +
+    'ORDER BY avgRating DESC LIMIT 5 ' +
+    'RETURN r.name as name, avgRating'
+  );
+
+  const topRatedRestaurantsAvg = result.records.map(record => ({
+    name: record.get('name'),
+    avgRating: record.get('avgRating')
+  }));
+
+  res.json(topRatedRestaurantsAvg);
+});
+
 // Uruchomienie serwera
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

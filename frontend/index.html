@@ -224,7 +224,8 @@
 
             data.forEach(item => {
               const listItem = document.createElement('li');
-              listItem.textContent = `${item.name} (${item.numRatings} opinii)`;
+              const numRatings = Array.isArray(item.numRatings) ? item.numRatings.length : item.numRatings;
+              listItem.textContent = `${item.name} (${numRatings} opinii)`;
               topRatedList.appendChild(listItem);
             });
 

@@ -16,9 +16,9 @@
   </div>
 
   <div class="input-container">
-    <h2>Top 5 najlepiej ocenianych restauracji</h2>
+    <h2>Top 5 najbardziej ocenianych restauracji</h2>
     <div id="topRatedRestaurants"></div>
-    <button onclick="getTopRatedRestaurants2()">Pobierz top restauracje</button>
+    <button onclick="getBestRatedRestaurants()">Pobierz top restauracje</button>
   </div>
 
   <div class="input-container">
@@ -246,27 +246,13 @@
         .catch(error => console.error('Error:', error));
     }
 
-    function getTopRatedRestaurants2() {
-      fetch(`${apiUrl}/getTopRatedRestaurants2`)
+    function getBestRatedRestaurants() {
+      fetch(`${apiUrl}/bestRatedRestaurants`)
         .then(response => response.json())
         .then(data => {
           console.log('Top Rated Restaurants:', data);
           const topRatedRestaurantsContainer = document.getElementById('topRatedRestaurants');
-          topRatedRestaurantsContainer.innerHTML = '';
-
-          if (data.length > 0) {
-            const topRatedList = document.createElement('ul');
-
-            data.forEach(item => {
-              const listItem = document.createElement('li');
-              listItem.textContent = `${item.name} (Średnia ocena: ${item.avgRating.toFixed(2)})`;
-              topRatedList.appendChild(listItem);
-            });
-
-            topRatedRestaurantsContainer.appendChild(topRatedList);
-          } else {
-            topRatedRestaurantsContainer.textContent = 'Brak danych.';
-          }
+          topRatedRestaurantsContainer.innerHTML = formatRestaurantsList(data);
         })
         .catch(error => console.error('Error:', error));
     }

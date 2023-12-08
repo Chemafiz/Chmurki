@@ -34,12 +34,12 @@ app.post('/addUser', async (req, res) => {
 
 // Dodanie piosenki do bazy danych
 app.post('/addRestaurant', async (req, res) => {
-  const { songTitle } = req.body;
-  const songId = Date.now();  // Użyj Date.now() jako unikalnego ID
+  const { restaurantName } = req.body;
+  const restaurantId = Date.now();  // Użyj Date.now() jako unikalnego ID
 
   const result = await session.run(
-    'CREATE (:Song {id: $songId, title: $songTitle})',
-    { songId, songTitle }
+    'CREATE (:Restaurant {id: $restaurantId, name: $restaurantName})',
+    { restaurantId, restaurantName }
   );
 
   res.send(result.summary.counters._stats);

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Music Recommendation App</title>
+  <title>Aplikacja rekomendująca restauracje</title>
 </head>
 <body>
-  <h1>Music Recommendation App</h1>
+  <h1>Aplikacja rekomendująca restauracje</h1>
 
   <div class="input-container">
     <h2>Dodaj użytkownika</h2>
@@ -16,10 +16,10 @@
   </div>
 
   <div class="input-container">
-    <h2>Dodaj piosenkę</h2>
-    <label for="songTitle">Tytuł piosenki:</label>
+    <h2>Dodaj restaurację</h2>
+    <label for="songTitle">Nazwa restauracji:</label>
     <input type="text" id="songTitle">
-    <button onclick="addSong()">Dodaj</button>
+    <button onclick="addRestaurant()">Dodaj</button>
   </div>
 
   <div class="input-container">
@@ -30,7 +30,7 @@
     <input type="text" id="songTitleRating">
     <label for="rating">Ocena (1-5):</label>
     <input type="number" id="rating" min="1" max="5">
-    <button onclick="rateSong()">Oceń</button>
+    <button onclick="rateRestaurant()">Oceń</button>
   </div>
 
   <div class="input-container">
@@ -51,7 +51,7 @@
     <h2>Usuń piosenkę</h2>
     <label for="deleteSongTitle">Tytuł piosenki:</label>
     <input type="text" id="deleteSongTitle">
-    <button onclick="deleteSong()">Usuń</button>
+    <button onclick="deleteRestaurant()">Usuń</button>
   </div>
 
   <script>
@@ -73,7 +73,7 @@
       .catch(error => console.error('Error:', error));
     }
 
-    function addSong() {
+    function addRestaurant() {
       const songTitle = document.getElementById('songTitle').value;
 
       fetch(`${apiUrl}/addSong`, {
@@ -88,7 +88,7 @@
       .catch(error => console.error('Error:', error));
     }
 
-    function rateSong() {
+    function rateRestaurant() {
       const userName = document.getElementById('userNameRating').value;
       const songTitle = document.getElementById('songTitleRating').value;
       const rating = document.getElementById('rating').value;
@@ -128,7 +128,7 @@
       .catch(error => console.error('Error:', error));
     }
 
-    function deleteSong() {
+    function deleteRestaurant() {
       const songTitle = document.getElementById('deleteSongTitle').value;
 
       fetch(`${apiUrl}/deleteSong/${songTitle}`, {

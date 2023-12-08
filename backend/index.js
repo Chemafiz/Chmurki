@@ -33,7 +33,7 @@ app.post('/addUser', async (req, res) => {
 });
 
 // Dodanie piosenki do bazy danych
-app.post('/addSong', async (req, res) => {
+app.post('/addRestaurant', async (req, res) => {
   const { songTitle } = req.body;
   const songId = Date.now();  // Użyj Date.now() jako unikalnego ID
 
@@ -46,7 +46,7 @@ app.post('/addSong', async (req, res) => {
 });
 
 // Ocena piosenki przez użytkownika
-app.post('/rateSong', async (req, res) => {
+app.post('/rateRestaurant', async (req, res) => {
   const { userName, songTitle, rating } = req.body;
 
   const result = await session.run(
@@ -59,7 +59,7 @@ app.post('/rateSong', async (req, res) => {
 });
 
 // Prosta funkcja rekomendująca piosenki dla danego użytkownika
-app.get('/recommendSongs/:userName', async (req, res) => {
+app.get('/recommendRestaurant/:userName', async (req, res) => {
   const userName = req.params.userName;
 
   const result = await session.run(
@@ -88,7 +88,7 @@ app.delete('/deleteUser/:userName', async (req, res) => {
 });
 
 // Usunięcie piosenki po nazwie
-app.delete('/deleteSong/:songTitle', async (req, res) => {
+app.delete('/deleteRestaurant/:songTitle', async (req, res) => {
   const songTitle = req.params.songTitle;
 
   const result = await session.run(

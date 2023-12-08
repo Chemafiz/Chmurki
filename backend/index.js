@@ -68,7 +68,7 @@ app.get('/recommendRestaurant/:userName', async (req, res) => {
   );
 
   const recommendations = result.records.map(record => ({
-    title: record.get('rec.title'),
+    title: record.get('rec.name'),
     avgRating: record.get('avgRating')
   }));
 

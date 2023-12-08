@@ -76,7 +76,7 @@
     function addRestaurant() {
       const songTitle = document.getElementById('songTitle').value;
 
-      fetch(`${apiUrl}/addSong`, {
+      fetch(`${apiUrl}/addRestaurant`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -93,7 +93,7 @@
       const songTitle = document.getElementById('songTitleRating').value;
       const rating = document.getElementById('rating').value;
 
-      fetch(`${apiUrl}/rateSong`, {
+      fetch(`${apiUrl}/rateRestaurant`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +108,7 @@
     function getRecommendations() {
       const userName = document.getElementById('recommendUserName').value;
 
-      fetch(`${apiUrl}/recommendSongs/${userName}`)
+      fetch(`${apiUrl}/recommendRestaurant/${userName}`)
       .then(response => response.json())
       .then(data => {
         console.log('Recommendations:', data);
@@ -131,7 +131,7 @@
     function deleteRestaurant() {
       const songTitle = document.getElementById('deleteSongTitle').value;
 
-      fetch(`${apiUrl}/deleteSong/${songTitle}`, {
+      fetch(`${apiUrl}/deleteRestaurant/${songTitle}`, {
         method: 'DELETE',
       })
       .then(response => response.json())

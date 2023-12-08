@@ -223,8 +223,10 @@
             const topRatedList = document.createElement('ul');
 
             data.forEach(item => {
+              console.log('Item:', item); // Dodaj ten log
+
               const listItem = document.createElement('li');
-              const numRatings = Array.isArray(item.numRatings) ? item.numRatings.length : item.numRatings;
+              const numRatings = typeof item.numRatings === 'object' ? item.numRatings.length : item.numRatings;
               listItem.textContent = `${item.name} (${numRatings} opinii)`;
               topRatedList.appendChild(listItem);
             });

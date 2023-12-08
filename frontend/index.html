@@ -4,61 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music Recommendation App</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #1f1f1f;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    h1, h2 {
-      color: #61dafb;
-    }
-
-    label {
-      color: #61dafb;
-      margin-right: 5px;
-    }
-
-    input {
-      padding: 8px;
-      margin-bottom: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #282c34;
-      color: #fff;
-      width: 200px;
-      margin-right: 10px;
-    }
-
-    button {
-      padding: 8px 15px;
-      background-color: #61dafb;
-      color: #282c34;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #41a1f1;
-    }
-
-    .input-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-  </style>
 </head>
 <body>
   <h1>Music Recommendation App</h1>
@@ -108,7 +53,6 @@
     <input type="text" id="deleteSongTitle">
     <button onclick="deleteSong()">Usuń</button>
   </div>
-</body>
 
   <script>
     const apiUrl = 'https://chmurki-backend.vercel.app';

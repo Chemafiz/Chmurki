@@ -246,6 +246,19 @@
         .catch(error => console.error('Error:', error));
     }
 
+    function formatRestaurantsList(restaurants) {
+      const listContainer = document.createElement('ul');
+
+      restaurants.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.name} (${item.avgRating.toFixed(2)} średnia ocena, ${item.numRatings} opinii)`;
+        listContainer.appendChild(listItem);
+      });
+
+      return listContainer;
+    }
+
+    
     function getBestRatedRestaurants() {
       fetch(`${apiUrl}/getBestRatedRestaurants`)
         .then(response => response.json())

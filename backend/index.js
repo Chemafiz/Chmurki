@@ -145,7 +145,8 @@ app.get('/getTopRatedRestaurantsWithAvgRating', async (req, res) => {
   try {
     const result = await session.run(
       'MATCH (r:Restaurant)-[rated:RATED]->() ' +
-      'WITH r, AVG(toFloat(rated.rating)) as avgRating ' +
+      'WITH r, COUNT(rated) as numRatings, AVG(toFloat(rated.rating)) as avgRating ' +
+      'WHERE numRatings > 0 ' +
       'ORDER BY avgRating DESC LIMIT 5 ' +
       'RETURN r.name as name, avgRating'
     );
@@ -160,9 +161,4 @@ app.get('/getTopRatedRestaurantsWithAvgRating', async (req, res) => {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-});
-
-// Uruchomienie serwera
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
 });

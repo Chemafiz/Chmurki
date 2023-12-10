@@ -165,11 +165,12 @@ app.get('/getRelatedUser/:userName', async (req, res) => {
   const userName = req.params.userName;
 
   const result = await session.run(
-    'MATCH (u:User {name: $userName})-[:RATED]->(:Restaurant)<-[:RATED]-(:User)-[:RATED]->(:Restaurant)<-[:RATED]-(other:User) ' +
-    'WHERE NOT (u)-[:RATED]->(:Restaurant)<-[:RATED]-(other) AND NOT u = other ' +
-    'WITH other, COUNT(other) as numSimilarRatings ' +
-    'RETURN other.name as userName, numSimilarRatings ' +
-    'ORDER BY numSimilarRatings DESC LIMIT 1',
+    'MATCH (u1:User {name: $userName})-[r1:RATED]->(rest:Restaurant)<-[r2:RATED]-(u2:User) ' +
+    'WITH u1, u2, COLLECT({restaurant: rest, rating: r1.rating - r2.rating}) AS ratingsDiff ' +
+    'WHERE u1 <> u2 AND SIZE(ratingsDiff) > 0 ' +
+    'WITH u2, REDUCE(s = 0, diff IN ratingsDiff | s + ABS(diff.rating)) AS similarity ' +
+    'RETURN u2.name AS similarUserName, similarity ' +
+    'ORDER BY similarity ASC LIMIT 1;',
     { userName }
   );
 

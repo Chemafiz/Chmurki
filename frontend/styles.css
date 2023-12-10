@@ -19,6 +19,7 @@ body {
   .container {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap; /* Dodane dla obsługi responsywności */
   }
   
   .input-container {
@@ -28,21 +29,24 @@ body {
     width: 45%;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Dodane, aby padding i border nie wpływały na szerokość */
+  }
+  
+  /* Styl dla kontenerów input o podwójnej szerokości */
+  .input-container.double-width {
+    width: 100%;
+  }
+  
+  /* Styl dla kontenera inputa na środku ekranu */
+  .input-container.centered {
+    text-align: center;
+    width: 100%;
   }
   
   /* Styl dla etykiet */
   label {
     display: block;
     margin-bottom: 8px;
-  }
-  
-  /* Styl dla pól tekstowych i liczbowych */
-  input[type="text"],
-  input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px; /* Zmieniona wielkość czcionki */
-    margin-bottom: 10px;
   }
   
   /* Styl dla przycisków */

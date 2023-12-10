@@ -63,7 +63,11 @@ app.get('/recommendRestaurant/:userName', async (req, res) => {
   const userName = req.params.userName;
 
   const result = await session.run(
-    'MATCH (u:User {name: $userName})-[r:RATED]->(rest:Restaurant)<-[:RATED]-(other:User)-[:RATED]->(rec:Restaurant) WHERE NOT (u)-[:RATED]->(rec) RETURN rec.name, AVG(r.rating) as avgRating ORDER BY avgRating DESC LIMIT 5',
+    'MATCH (u:User {name: $userName})-[r:RATED]->(rest:Restaurant)<-[:RATED]-(other:User)-[r2:RATED]->(rec:Restaurant) ' +
+    'WHERE NOT (u)-[:RATED]->(rec) ' +
+    'WITH rec, AVG(r2.rating) as avgRating ' +
+    'RETURN rec.name, avgRating ' +
+    'ORDER BY avgRating DESC LIMIT 5;',
     { userName }
   );
 

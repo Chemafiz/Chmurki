@@ -295,7 +295,7 @@
                 ? item.avgRating.low  // Użyj low z obiektu numRatings
                 : item.avgRating;
 
-              listItem.textContent = `${item.name} (${avgRating} gwiazdek)`;
+              listItem.textContent = `${item.name} (Średnia ocena: ${avgRating})`;
               topRatedList.appendChild(listItem);
             });
 

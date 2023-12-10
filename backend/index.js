@@ -157,7 +157,7 @@ app.get('/getBestRatedRestaurants', async (req, res) => {
   res.json(topRatedRestaurants);
 });
 
-// Uruchomienie serweraasdasdasasd
+// Uruchomienie serweraasdasdasasddfg
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });

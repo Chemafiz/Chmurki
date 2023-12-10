@@ -75,10 +75,9 @@
 
   <div class="input-container">
     <h2>Najbardziej podobny użytkownik</h2>
-    <label for="recommendUserName">Nazwa użytkownika:</label>
-    <input type="text" id="recommendUserName">
+    <label for="recommendUserName2">Nazwa użytkownika:</label>
+    <input type="text" id="recommendUserName2">
     <button onclick="getRelatedUser()">Pokaż</button>
-    <div id="relatedUser"></div>
   </div>
 
   <div class="input-container">
@@ -316,16 +315,15 @@
     }
 
     function getRelatedUser() {
-      const userName = document.getElementById('recommendUserName').value;
-
+      const userName = document.getElementById('recommendUserName2').value;
       fetch(`${apiUrl}/getRelatedUser/${userName}`)
         .then(response => response.json())
         .then(data => {
-          console.log('Related User:', data);
-          const relatedUserContainer = document.getElementById('relatedUser');
-          relatedUserContainer.innerHTML = `Najbardziej podobny użytkownik to: ${data.name}`;
+          console.log('Recommendations:', data);
+          alert(`Najlepsze restauracje dla Ciebie to:\n${data.map(item => `${item.name}`).join('\n')}`);
         })
-        .catch(error => console.error('Error:', error));
+      
+      .catch(error => console.error('Error:', error));
     }
 
   </script>

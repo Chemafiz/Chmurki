@@ -26,6 +26,7 @@
     <label for="userName">Nazwa użytkownika:</label>
     <input type="text" id="userName">
     <button onclick="addUser()">Dodaj</button>
+    <div id="userMessage"></div>
   </div>
 
   <div class="input-container">
@@ -94,7 +95,15 @@
         mode: 'cors'
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        // Sprawdź, czy użytkownik został dodany
+        if (data && data.createdNodes > 0) {
+          document.getElementById('userMessage').textContent = 'Użytkownik dodany!';
+        } else {
+          document.getElementById('userMessage').textContent = 'Nie udało się dodać użytkownika.';
+        }
+      })
       .catch(error => console.error('Error:', error));
     }
 
@@ -246,18 +255,7 @@
         .catch(error => console.error('Error:', error));
     }
 
-    
-    function formatRestaurantsList(restaurants) {
-      const listContainer = document.createElement('ul');
-
-      restaurants.forEach(item => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${item.name} (${item.avgRating.toFixed(2)} średnia ocena, ${item.numRatings} opinii)`;
-        listContainer.appendChild(listItem);
-      });
-
-      return listContainer;
-    }
+  
 
 
     function getBestRatedRestaurants() {
@@ -275,7 +273,7 @@
               const listItem = document.createElement('li');
 
               // Dostosowany kod do obsługi obiektu numRatingssf
-              const numRatings = typeof item.avgRating === 'object'
+              const avgRating = typeof item.avgRating === 'object'
                 ? item.avgRating.low  // Użyj low z obiektu numRatings
                 : item.avgRating;
 

@@ -74,6 +74,14 @@
   </div>
 
   <div class="input-container">
+    <h2>Najbardziej podobny użytkownik</h2>
+    <label for="recommendUserName">Nazwa użytkownika:</label>
+    <input type="text" id="recommendUserName">
+    <button onclick="getRelatedUser()">Pokaż</button>
+    <div id="relatedUser"></div>
+  </div>
+
+  <div class="input-container">
     <h2>Usuń użytkownika</h2>
     <label for="deleteUserName">Nazwa użytkownika:</label>
     <input type="text" id="deleteUserName">
@@ -158,7 +166,7 @@
       .then(response => response.json())
       .then(data => {
         console.log('Recommendations:', data);
-        alert(`Najlepsze restauracje dla Ciebie to:\n${data.map(item => `${item.name} (Średnia ocena: ${item.avgRating})`).join('\n')}`);
+        alert(`Najlepsze restauracje dla Ciebie to:\n${data.map(item => `${item.name} (Ocena innych: ${item.avgRating})`).join('\n')}`);
       })
       .catch(error => console.error('Error:', error));
     }
@@ -303,6 +311,19 @@
           } else {
             topRatedRestaurantsContainer.textContent = 'Brak danych.';
           }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function getRelatedUser() {
+      const userName = document.getElementById('recommendUserName').value;
+
+      fetch(`${apiUrl}/getRelatedUser/${userName}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Related User:', data);
+          const relatedUserContainer = document.getElementById('relatedUser');
+          relatedUserContainer.innerHTML = `Najbardziej podobny użytkownik to: ${data.name}`;
         })
         .catch(error => console.error('Error:', error));
     }

@@ -161,6 +161,26 @@ app.get('/getBestRatedRestaurants', async (req, res) => {
   res.json(topRatedRestaurants);
 });
 
+app.get('/getRelatedUser/:userName', async (req, res) => {
+  const userName = req.params.userName;
+
+  const result = await session.run(
+    'MATCH (u:User {name: $userName})-[:RATED]->(:Restaurant)<-[:RATED]-(:User)-[:RATED]->(:Restaurant)<-[:RATED]-(other:User) ' +
+    'WHERE NOT (u)-[:RATED]->(:Restaurant)<-[:RATED]-(other) AND NOT u = other ' +
+    'WITH other, COUNT(other) as numSimilarRatings ' +
+    'RETURN other.name as userName, numSimilarRatings ' +
+    'ORDER BY numSimilarRatings DESC LIMIT 1',
+    { userName }
+  );
+
+  const relatedUser = result.records.map(record => ({
+    name: record.get('userName'),
+  }))[0];
+
+  res.json(relatedUser);
+});
+
+
 // Uruchomienie serweraasdasdasasddfg
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

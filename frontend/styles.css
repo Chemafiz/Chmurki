@@ -15,11 +15,17 @@ body {
     text-align: center;
   }
   
-  /* Styl dla wszystkich kontenerów input */
+  /* Styl dla kontenerów input */
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
   .input-container {
     background-color: #fff;
     padding: 20px;
     margin: 20px;
+    width: 45%;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }

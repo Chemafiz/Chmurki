@@ -175,7 +175,7 @@ app.get('/getRelatedUser/:userName', async (req, res) => {
   );
 
   const relatedUser = result.records.map(record => ({
-    name: record.get('userName'),
+    name: record.get('similarUserName'),
   }))[0];
 
   res.json(relatedUser);

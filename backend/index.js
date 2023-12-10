@@ -126,10 +126,10 @@ app.get('/getAllRestaurants', async (req, res) => {
 
 app.get('/getTopRatedRestaurants', async (req, res) => {
   const result = await session.run(
-    'MATCH (r:Restaurant)<-[rating:RATED]-() ' +
-    'WITH r, COUNT(rating) as numRatings ' +
-    'RETURN r.name as restaurantName, numRatings ' +
-    'ORDER BY numRatings DESC LIMIT 5'
+      'MATCH (r:Restaurant)<-[rating:RATED]-() ' +
+      'WITH r, COUNT(rating) as numRatings ' +
+      'RETURN r.name as restaurantName, numRatings ' +
+      'ORDER BY numRatings DESC LIMIT 5'
   );
 
   const topRatedRestaurants = result.records.map(record => ({
@@ -143,14 +143,14 @@ app.get('/getTopRatedRestaurants', async (req, res) => {
 
 app.get('/getBestRatedRestaurants', async (req, res) => {
   const result = await session.run(
-    'MATCH (r:Restaurant)-[rat:RATED]->() ' +
-    'WITH r, AVG(rat.rating) AS avgRating ' +
-    'RETURN r.name AS name, avgRating ' +
-    'ORDER BY avgRating DESC LIMIT 5'
+    'MATCH (r:Restaurant)<-[rating:RATED]-() ' +
+    'WITH r, toFloat(SUM(rating.rating)) / toFloat(COUNT(rating)) as avgRating ' +
+    'RETURN r.name as restaurantName, avgRating ' +
+    'ORDER BY avgRating DESC LIMIT 5;'
   );
 
   const topRatedRestaurants = result.records.map(record => ({
-    name: record.get('name'),
+    name: record.get('restaurantName'),
     avgRating: record.get('avgRating')
   }));
 

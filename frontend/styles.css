@@ -78,7 +78,8 @@ body {
     justify-content: center;
   }
   
-  .center {
+  /* Dodaj nowy styl dla centralnie wyjustowanego kontenera */
+.center {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,4 +89,5 @@ body {
   /* Styl dla kontenera input */
   .input-container.center {
     text-align: center;
+    margin: auto; /* Dodaj tę linię, aby wycentrować element */
   }

@@ -1,78 +1,77 @@
 /* Styl dla całej strony */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
-  
-  /* Styl dla kontenera z nagłówkiem */
-  h1 {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    margin: 0;
-    text-align: center;
-  }
-  
-  /* Styl dla kontenerów input */
-  .container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Dodane dla obsługi responsywności */
-  }
-  
-  .input-container {
-    background-color: #fff;
-    padding: 20px;
-    margin: 20px;
-    width: 45%;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Dodane, aby padding i border nie wpływały na szerokość */
-  }
-  
-  /* Styl dla kontenerów input o podwójnej szerokości */
-  .input-container.double-width {
-    width: 100%;
-  }
-  
-  /* Styl dla kontenera inputa na środku ekranu */
-  .input-container.centered {
-    text-align: center;
-    width: 100%;
-  }
-  
-  /* Styl dla etykiet */
-  label {
-    display: block;
-    margin-bottom: 8px;
-  }
-  
-  /* Styl dla przycisków */
-  button {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  /* Styl dla komunikatów sukcesu lub błędu */
-  .message {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  /* Styl dla listy */
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  /* Styl dla elementów listy */
-  li {
-    margin-bottom: 8px;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Styl dla kontenera z nagłówkiem */
+h1 {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  margin: 0;
+  text-align: center;
+}
+
+/* Styl dla kontenerów input */
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Dodane dla obsługi responsywności */
+}
+
+.input-container {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  width: 45%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Dodane, aby padding i border nie wpływały na szerokość */
+}
+
+/* Styl dla kontenerów input o podwójnej szerokości */
+.input-container.double-width {
+  width: 100%;
+}
+
+/* Styl dla kontenera inputa na środku ekranu */
+.input-container.centered {
+  text-align: center;
+  width: 100%;
+}
+
+/* Styl dla etykiet */
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Styl dla przycisków */
+button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Styl dla komunikatów sukcesu lub błędu */
+.message {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Styl dla listy */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Styl dla elementów listy */
+li {
+  margin-bottom: 8px;
+}

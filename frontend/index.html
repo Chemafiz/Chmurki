@@ -321,7 +321,7 @@
         .then(response => response.json())
         .then(data => {
           console.log('Related User:', data);
-          alert(`Ty i "${data.name}" macie podobne preferencje! \n\n\n PS może pora na Wasze wspólne wyjście na jedzonko?`);
+          alert(`Ty i "${data.name}" macie podobne preferencje!`);
         })
       .catch(error => console.error('Error:', error));
     }

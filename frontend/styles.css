@@ -36,6 +36,15 @@ body {
     margin-bottom: 8px;
   }
   
+  /* Styl dla pól tekstowych i liczbowych */
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px; /* Zmieniona wielkość czcionki */
+    margin-bottom: 10px;
+  }
+  
   /* Styl dla przycisków */
   button {
     background-color: #333;

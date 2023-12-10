@@ -265,8 +265,15 @@
         .then(response => response.json())
         .then(data => {
           console.log('Top Rated Restaurants:', data);
-          const topRatedRestaurantsContainer = document.getElementById('getBestRatedRestaurants');
-          topRatedRestaurantsContainer.innerHTML = formatRestaurantsList(data);
+          const topRatedRestaurantsContainer = document.getElementById('topRatedRestaurants');
+          topRatedRestaurantsContainer.innerHTML = '';
+
+          if (data.length > 0) {
+            const topRatedList = formatRestaurantsList(data);
+            topRatedRestaurantsContainer.appendChild(topRatedList);
+          } else {
+            topRatedRestaurantsContainer.textContent = 'Brak danych.';
+          }
         })
         .catch(error => console.error('Error:', error));
     }

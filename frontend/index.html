@@ -262,14 +262,27 @@
 
     function getBestRatedRestaurants() {
       fetch(`${apiUrl}/getBestRatedRestaurants`)
-        .then(response => response.json())
+      .then(response => response.json())
         .then(data => {
           console.log('Top Rated Restaurants:', data);
-          const topRatedRestaurantsContainer = document.getElementById('topRatedRestaurants');
+          const topRatedRestaurantsContainer = document.getElementById('getBestRatedRestaurants');
           topRatedRestaurantsContainer.innerHTML = '';
 
           if (data.length > 0) {
-            const topRatedList = formatRestaurantsList(data);
+            const topRatedList = document.createElement('ul');
+
+            data.forEach(item => {
+              const listItem = document.createElement('li');
+
+              // Dostosowany kod do obsługi obiektu numRatingssf
+              const numRatings = typeof item.avgRating === 'object'
+                ? item.avgRating.low  // Użyj low z obiektu numRatings
+                : item.avgRating;
+
+              listItem.textContent = `${item.name} (${avgRating} opinii)`;
+              topRatedList.appendChild(listItem);
+            });
+
             topRatedRestaurantsContainer.appendChild(topRatedList);
           } else {
             topRatedRestaurantsContainer.textContent = 'Brak danych.';

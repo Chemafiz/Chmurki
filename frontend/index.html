@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aplikacja rekomendująca restauracje</title>
+  <title>Aplikacja do rekomendacji restauracjii</title>
 </head>
 <body>
-  <h1>Aplikacja rekomendująca restauracje</h1>
+  <h1>Aplikacja do rekomendacji restauracjii</h1>
 
 
   <div class="input-container">
     <h2>Top 5 najbardziej opiniowanych restauracji</h2>
     <div id="topRatedRestaurants"></div>
-    <button onclick="getTopRatedRestaurants()">Pobierz top restauracje</button>
+    <button onclick="getTopRatedRestaurants()">Pokaż listę</button>
   </div>
 
   <div class="input-container">
-    <h2>Top 5 najbardziej ocenianych restauracji</h2>
+    <h2>Top 5 najlepiej ocenianych restauracji</h2>
     <div id="getBestRatedRestaurants"></div>
-    <button onclick="getBestRatedRestaurants()">Pobierz top restauracje</button>
+    <button onclick="getBestRatedRestaurants()">Pokaż listę</button>
   </div>
 
   <div class="input-container">
-    <h2>Dodaj użytkownika</h2>
+    <h2>Dodaj nowego użytkownika</h2>
     <label for="userName">Nazwa użytkownika:</label>
     <input type="text" id="userName">
     <button onclick="addUser()">Dodaj</button>
@@ -30,7 +30,7 @@
   </div>
 
   <div class="input-container">
-    <h2>Dodaj restaurację</h2>
+    <h2>Dodaj nową restaurację</h2>
     <label for="restaurantName">Nazwa restauracji:</label>
     <input type="text" id="restaurantName">
     <button onclick="addRestaurant()">Dodaj</button>
@@ -42,16 +42,16 @@
     <input type="text" id="userNameRating">
     <label for="restaurantNameRating">Nazwa restauracji:</label>
     <input type="text" id="restaurantNameRating">
-    <label for="rating">Ocena (1-5):</label>
+    <label for="rating">Liczba gwiazdek (1-5):</label>
     <input type="number" id="rating" min="1" max="5">
     <button onclick="rateRestaurant()">Oceń</button>
   </div>
 
   <div class="input-container">
-    <h2>Rekomendacje</h2>
+    <h2>Najbardziej dopasowane do Ciebie restauracje</h2>
     <label for="recommendUserName">Nazwa użytkownika:</label>
     <input type="text" id="recommendUserName">
-    <button onclick="getRecommendations()">Pobierz</button>
+    <button onclick="getRecommendations()">Pokaż</button>
   </div>
 
   <div class="input-container">
@@ -69,15 +69,15 @@
   </div>
 
   <div class="input-container">
-    <h2>Lista użytkowników</h2>
+    <h2>Lista wszystkich użytkowników</h2>
     <div id="userList"></div>
-    <button onclick="getAllUsers()">Pobierz użytkowników</button>
+    <button onclick="getAllUsers()">Pokaż użytkowników</button>
   </div>
 
   <div class="input-container">
-    <h2>Lista restauracji</h2>
+    <h2>Lista wszystkich restauracji</h2>
     <div id="restaurantList"></div>
-    <button onclick="getAllRestaurants()">Pobierz restauracje</button>
+    <button onclick="getAllRestaurants()">Pokaż restauracje</button>
   </div>
 
   <script>
@@ -97,12 +97,7 @@
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        // Sprawdź, czy użytkownik został dodany
-        if (data && data.createdNodes > 0) {
-          document.getElementById('userMessage').textContent = 'Użytkownik dodany!';
-        } else {
-          document.getElementById('userMessage').textContent = 'Nie udało się dodać użytkownika.';
-        }
+        document.getElementById('userMessage').textContent = 'Użytkownik dodany!';
       })
       .catch(error => console.error('Error:', error));
     }

@@ -10,7 +10,7 @@
 
 
   <div class="input-container">
-    <h2>Top 5 najbardziej opiniowanych restauracji</h2>
+    <h2>Top 5 najpopularniejszych restauracji</h2>
     <div id="topRatedRestaurants"></div>
     <button onclick="getTopRatedRestaurants()">Pokaż listę</button>
   </div>
@@ -34,6 +34,7 @@
     <label for="restaurantName">Nazwa restauracji:</label>
     <input type="text" id="restaurantName">
     <button onclick="addRestaurant()">Dodaj</button>
+    <div id="reastaurantMessage"></div>
   </div>
 
   <div class="input-container">
@@ -45,6 +46,7 @@
     <label for="rating">Liczba gwiazdek (1-5):</label>
     <input type="number" id="rating" min="1" max="5">
     <button onclick="rateRestaurant()">Oceń</button>
+    <div id="rateMessage"></div>
   </div>
 
   <div class="input-container">
@@ -59,6 +61,7 @@
     <label for="deleteUserName">Nazwa użytkownika:</label>
     <input type="text" id="deleteUserName">
     <button onclick="deleteUser()">Usuń</button>
+    <div id="deleteUserMessage"></div>
   </div>
 
   <div class="input-container">
@@ -66,6 +69,7 @@
     <label for="deleteRestaurantName">Nazwa restauracji:</label>
     <input type="text" id="deleteRestaurantName">
     <button onclick="deleteRestaurant()">Usuń</button>
+    <div id="deleteRestaurantMessage"></div>
   </div>
 
   <div class="input-container">
@@ -113,7 +117,10 @@
         body: JSON.stringify({ restaurantName }),
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        document.getElementById('restaurantMessage').textContent = 'Restauracja dodana!';
+      })
       .catch(error => console.error('Error:', error));
     }
 
@@ -130,7 +137,10 @@
         body: JSON.stringify({ userName, restaurantName, rating }),
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        document.getElementById('rateMessage').textContent = 'Ocena dodana!';
+      })
       .catch(error => console.error('Error:', error));
     }
 
@@ -153,7 +163,10 @@
         method: 'DELETE',
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        document.getElementById('deleteUserMessage').textContent = 'Użytkownik usunięty!';
+      })
       .catch(error => console.error('Error:', error));
     }
 
@@ -164,7 +177,10 @@
         method: 'DELETE',
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        document.getElementById('deleteRestaurantMessage').textContent = 'Restauracja usunięta!';
+      })
       .catch(error => console.error('Error:', error));
     }
 
@@ -272,7 +288,7 @@
                 ? item.avgRating.low  // Użyj low z obiektu numRatings
                 : item.avgRating;
 
-              listItem.textContent = `${item.name} (${avgRating} opinii)`;
+              listItem.textContent = `${item.name} (${avgRating} gwiazdek)`;
               topRatedList.appendChild(listItem);
             });
 

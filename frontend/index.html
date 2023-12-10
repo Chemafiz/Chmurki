@@ -9,7 +9,6 @@
 <body>
   <h1>Aplikacja do rekomendacji restauracjii</h1>
 
-
   <div class="container">
     <div class="input-container">
       <h2>Top 5 najpopularniejszych restauracji</h2>
@@ -38,23 +37,25 @@
     </div>
   </div>
 
-  <div class="input-container">
-    <h2>Dodaj nowego użytkownika</h2>
-    <label for="userName">Nazwa użytkownika:</label>
-    <input type="text" id="userName">
-    <button onclick="addUser()">Dodaj</button>
-    <div id="userMessage"></div>
+  <div class="container">
+    <div class="input-container">
+      <h2>Dodaj nowego użytkownika</h2>
+      <label for="userName">Nazwa użytkownika:</label>
+      <input type="text" id="userName">
+      <button onclick="addUser()">Dodaj</button>
+      <div id="userMessage"></div>
+    </div>
+
+    <div class="input-container">
+      <h2>Dodaj nową restaurację</h2>
+      <label for="restaurantName">Nazwa restauracji:</label>
+      <input type="text" id="restaurantName">
+      <button onclick="addRestaurant()">Dodaj</button>
+      <div id="restaurantMessage"></div>
+    </div>
   </div>
 
-  <div class="input-container">
-    <h2>Dodaj nową restaurację</h2>
-    <label for="restaurantName">Nazwa restauracji:</label>
-    <input type="text" id="restaurantName">
-    <button onclick="addRestaurant()">Dodaj</button>
-    <div id="restaurantMessage"></div>
-  </div>
-
-  <div class="input-container">
+  <div class="input-container" style="text-align: center;">
     <h2>Oceń restaurację</h2>
     <label for="userNameRating">Nazwa użytkownika:</label>
     <input type="text" id="userNameRating">
@@ -66,37 +67,39 @@
     <div id="rateMessage"></div>
   </div>
 
-  <div class="input-container">
-    <h2>Najbardziej dopasowane do Ciebie restauracje</h2>
-    <label for="recommendUserName">Nazwa użytkownika:</label>
-    <input type="text" id="recommendUserName">
-    <button onclick="getRecommendations()">Pokaż</button>
+  <div class="container">
+    <div class="input-container">
+      <h2>Najbardziej dopasowane do Ciebie restauracje</h2>
+      <label for="recommendUserName">Nazwa użytkownika:</label>
+      <input type="text" id="recommendUserName">
+      <button onclick="getRecommendations()">Pokaż</button>
+    </div>
+
+    <div class="input-container">
+      <h2>Najbardziej podobny użytkownik</h2>
+      <label for="recommendUserName2">Nazwa użytkownika:</label>
+      <input type="text" id="recommendUserName2">
+      <button onclick="getRelatedUser()">Pokaż</button>
+    </div>
   </div>
 
-  <div class="input-container">
-    <h2>Najbardziej podobny użytkownik</h2>
-    <label for="recommendUserName2">Nazwa użytkownika:</label>
-    <input type="text" id="recommendUserName2">
-    <button onclick="getRelatedUser()">Pokaż</button>
+  <div class="container">
+    <div class="input-container">
+      <h2>Usuń użytkownika</h2>
+      <label for="deleteUserName">Nazwa użytkownika:</label>
+      <input type="text" id="deleteUserName">
+      <button onclick="deleteUser()">Usuń</button>
+      <div id="deleteUserMessage"></div>
+    </div>
+
+    <div class="input-container">
+      <h2>Usuń restaurację</h2>
+      <label for="deleteRestaurantName">Nazwa restauracji:</label>
+      <input type="text" id="deleteRestaurantName">
+      <button onclick="deleteRestaurant()">Usuń</button>
+      <div id="deleteRestaurantMessage"></div>
+    </div>
   </div>
-
-  <div class="input-container">
-    <h2>Usuń użytkownika</h2>
-    <label for="deleteUserName">Nazwa użytkownika:</label>
-    <input type="text" id="deleteUserName">
-    <button onclick="deleteUser()">Usuń</button>
-    <div id="deleteUserMessage"></div>
-  </div>
-
-  <div class="input-container">
-    <h2>Usuń restaurację</h2>
-    <label for="deleteRestaurantName">Nazwa restauracji:</label>
-    <input type="text" id="deleteRestaurantName">
-    <button onclick="deleteRestaurant()">Usuń</button>
-    <div id="deleteRestaurantMessage"></div>
-  </div>
-
-
 
   <script>
     const apiUrl = 'https://chmurki-backend.vercel.app';

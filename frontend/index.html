@@ -316,15 +316,16 @@
 
     function getRelatedUser() {
       const userName = document.getElementById('recommendUserName2').value;
+
       fetch(`${apiUrl}/getRelatedUser/${userName}`)
         .then(response => response.json())
         .then(data => {
-          console.log('Recommendations:', data);
-          alert(`Najlepsze restauracje dla Ciebie to:\n${data.map(item => `${item.name}`).join('\n')}`);
+          console.log('Related User:', data);
+          alert(`Najbardziej podobny użytkownik to: ${data.name}`);
         })
-      
       .catch(error => console.error('Error:', error));
     }
+
 
   </script>
 </body>
